@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ESP · Painel Professor v4.2</title>
+<link rel="stylesheet" href="style.css">
+<!-- MSAL, SweetAlert2, XLSX -->
+<script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<header class="header">
+  <div class="logo">
+    <div class="mark">ESP</div>
+    <div>
+      <strong>Educação · Painel</strong>
+      <div class="small">v4.2 — Admin Tabs + Sessão Ativa</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="status-box" id="userStatus">
+      <span id="sessNome">Sessão: não iniciada</span>
+      <span id="syncIndicator" style="opacity:0.9;margin-left:6px">—</span>
+    </div>
+    <button id="themeToggle" class="btn ghost" title="Tema">Tema</button>
+    <button id="btnMsLogin" class="btn">Entrar</button>
+    <button id="btnMsLogout" class="btn ghost" style="display:none">Sair</button>
+  </div>
+</header>
+
+<main class="container" style="padding-top:18px">
+  <div class="grid">
+    <div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h3>📅 Painel do Dia</h3>
+            <div class="small">Registos rápidos para professores</div>
+          </div>
+          <div class="small">Sessão activa: <strong id="sessNomeHeader">—</strong></div>
+        </div>
+        <div style="margin-top:12px" class="flex">
+          <input id="dataHoje" type="date" class="input" style="width:180px">
+          <button id="btnRefreshDay" class="btn ghost">Recarregar</button>
+        </div>
+        <div id="sessoesHoje" style="margin-top:12px"></div>
+        <div class="footerNote">Campos validados; gravação imediata no OneDrive.</div>
+      </div>
+
+      <div class="card">
+        <h4>Registar manual</h4>
+        <div style="margin-top:8px">
+          <button id="btnManualReg" class="btn">Novo Registo</button>
+        </div>
+      </div>
+    </div>
+
+    <aside>
+      <div class="card">
+        <h4>Administração</h4>
+        <div class="small">Configuração & Importação</div>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <label class="btn ghost fileinput">
+            Ficheiros
+            <input id="fileImport" type="file" accept=".xlsx,.xls,.json" multiple style="display:none">
+          </label>
+          <button id="btnOpenAdmin" class="btn ghost">Admin</button>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button id="btnExportConfig" class="btn ghost">Exportar Config</button>
+          <button id="btnBackupNow" class="btn">Backup agora</button>
+        </div>
+        <div id="importLog" style="margin-top:10px;max-height:300px;overflow:auto" class="small"></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.264.0/dist/umd/lucide.min.js"></script>
+<script src="app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+  if(window.lucide && lucide.replace) lucide.replace();
+});
+</script>
+</body>
+</html>
