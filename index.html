@@ -85,5 +85,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
   if(window.lucide && lucide.replace) lucide.replace();
 });
 </script>
+
+<!-- 🔧 Força o botão Admin a funcionar mesmo que o app.js falhe -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const adminBtn = document.getElementById("btnOpenAdmin");
+  if (adminBtn) {
+    adminBtn.addEventListener("click", () => {
+      if (typeof openAdminModal === "function") {
+        openAdminModal();
+      } else {
+        Swal.fire("Erro", "Função de administração não carregada", "error");
+      }
+    });
+  }
+});
+</script>
+
 </body>
 </html>
